@@ -1,31 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ElementarnyAutomatKomorkowy
 {
+   /// <summary>
+   /// Typ stanu komórki
+   /// </summary>
    public enum StateType
    {
       Full,
       Empty
    }
 
+   /// <summary>
+   /// Reprezentuje zasadę określania stanu komórki
+   /// </summary>
    public class Rule
    {
       private int _priority;
 
+      /// <summary>
+      /// Stan komórki poprzedzającej
+      /// </summary>
       public StateType Previous { get; set; }
 
+      /// <summary>
+      /// Stan komórki aktualnej
+      /// </summary>
       public StateType Next { get; set; }
 
+      /// <summary>
+      /// Stan komórki kolejnej
+      /// </summary>
       public StateType CurrentState { get; set; }
 
+      /// <summary>
+      /// Nowa wartość dla komórki badanej
+      /// </summary>
       public StateType? Calculated { get; set; }
 
-      private Rule()
-         : this(StateType.Empty, StateType.Empty, StateType.Empty, null)
+      private Rule() : this(StateType.Empty, StateType.Empty, StateType.Empty, null)
       { }
 
       private Rule(int priority, StateType prev, StateType current, StateType next, StateType? calculated)
@@ -45,6 +59,10 @@ namespace ElementarnyAutomatKomorkowy
          CurrentState = current;
       }
 
+      /// <summary>
+      /// Zwraca pusty zbiór reguł (bez ustalonej wartości wyznaczonej)
+      /// </summary>
+      /// <returns></returns>
       public static Rule[] Custom()
          => new List<Rule>()
          {
@@ -58,6 +76,10 @@ namespace ElementarnyAutomatKomorkowy
             new Rule(7, StateType.Full, StateType.Full, StateType.Full, null),
          }.OrderBy(s => s._priority).ToArray();
 
+      /// <summary>
+      /// Zwraca zbiór reguł z wyznaczoną wartością dla systemu o podstawie 30
+      /// </summary>
+      /// <returns></returns>
       public static Rule[] GetRuleSet30()
          => new List<Rule>()
          {

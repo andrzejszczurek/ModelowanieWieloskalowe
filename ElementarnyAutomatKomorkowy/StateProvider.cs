@@ -10,16 +10,49 @@ namespace ElementarnyAutomatKomorkowy
    {
       private IEnumerable<Rule> m_ruleSet;
 
+      /// <summary>
+      /// Konstruktor domyślny. Tworzy providera dla systemu o podstawie 30.
+      /// </summary>
       public StateProvider()
          : this(30)
       { 
       }
 
+      /// <summary>
+      /// Tworzy dostawce stanów dla systemu o zdefiniowanej podstawie
+      /// </summary>
+      /// <param name="systemBase">Podstawa systemu</param>
       public StateProvider(byte systemBase)
       {
          SimpleConfigTest();
          m_ruleSet = PrepareRuleSet(GetStateConfiguration(systemBase), Rule.Custom());
       }
+
+      /// <summary>
+      /// Wyznacza aktualny stan dla komórki
+      /// </summary>
+      /// <param name="arr">Tablica stanów</param>
+      /// <param name="i">Pozycja elementu dla którego ma zostać określony stan</param>
+      /// <returns>Stan komórki</returns>
+      public StateType GetCurrentState(StateType[] arr, int i)
+      {
+         (StateType p, StateType c, StateType n) pattern;
+         if (i <= 0)
+            pattern = (arr[arr.Length - 1], arr[i], arr[i + 1]);
+         else if (i >= arr.Length - 1)
+            pattern = (arr[i - 1], arr[i], arr[0]);
+         else
+            pattern = (arr[i - 1], arr[i], arr[i + 1]);
+
+         return CalculateType(pattern.p, pattern.c, pattern.n);
+      }
+
+      private StateType CalculateType(StateType previous, StateType current, StateType next)
+         => m_ruleSet.Single(x => x.Previous == previous
+                                         && x.CurrentState == current
+                                         && x.Next == next).Calculated.Value;
+
+      #region config
 
       private void SimpleConfigTest()
       {
@@ -43,7 +76,6 @@ namespace ElementarnyAutomatKomorkowy
             rule.Calculated = configArray[i];
             i++;
          }
-
          return baseRuleSet;
       }
 
@@ -64,22 +96,7 @@ namespace ElementarnyAutomatKomorkowy
          return configArr;
       }
 
-      public StateType GetCurrentState(StateType[] arr, int i)
-      {
-         (StateType p, StateType c, StateType n) pattern;
-         if (i <= 0)
-            pattern = (arr[arr.Length - 1], arr[i], arr[i + 1]);
-         else if (i >= arr.Length - 1)
-            pattern = (arr[i - 1], arr[i], arr[0]);
-         else
-            pattern = (arr[i - 1], arr[i], arr[i + 1]);
+      #endregion
 
-         return CalculateType(pattern.p, pattern.c, pattern.n);
-      }
-
-      private StateType CalculateType(StateType previous, StateType current, StateType next)
-         => m_ruleSet.Single(x => x.Previous == previous
-                                               && x.CurrentState == current
-                                               && x.Next == next).Calculated.Value;
    }
 }
