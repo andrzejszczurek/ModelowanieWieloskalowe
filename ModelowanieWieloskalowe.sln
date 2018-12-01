@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.28010.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElementarnyAutomatKomorkowy", "ElementarnyAutomatKomorkowy\ElementarnyAutomatKomorkowy.csproj", "{97FFE94B-6290-4085-BCE9-5BAE28947679}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Impl", "App.Impl\App.Impl.csproj", "{19FD2C35-1703-41D0-A537-75E73BD53BC2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheGameOfLive", "TheGameOfLive\TheGameOfLive.csproj", "{41F35163-947D-41B0-B7D8-E1B0D2496675}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{97FFE94B-6290-4085-BCE9-5BAE28947679}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97FFE94B-6290-4085-BCE9-5BAE28947679}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97FFE94B-6290-4085-BCE9-5BAE28947679}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19FD2C35-1703-41D0-A537-75E73BD53BC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19FD2C35-1703-41D0-A537-75E73BD53BC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19FD2C35-1703-41D0-A537-75E73BD53BC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19FD2C35-1703-41D0-A537-75E73BD53BC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41F35163-947D-41B0-B7D8-E1B0D2496675}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41F35163-947D-41B0-B7D8-E1B0D2496675}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41F35163-947D-41B0-B7D8-E1B0D2496675}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41F35163-947D-41B0-B7D8-E1B0D2496675}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
