@@ -3,7 +3,6 @@ using System;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
-using System.Threading.Tasks;
 using System.ComponentModel;
 
 namespace TheGameOfLive
@@ -18,13 +17,25 @@ namespace TheGameOfLive
 
       private int m_operationCounter = 0;
 
+      private Size m_shapePreviewSize;
+
+      private int m_cellSize = 5;
+
+      private int m_shapePreviewCellSize = 10;
+
       public GameForm()
       {
          InitializeComponent();
-         m_gameCreator = new GameCreator(10, new Size(panelPopulation.Width, panelPopulation.Height));
+         m_gameCreator = new GameCreator(m_cellSize, new Size(pictureBox.Width, pictureBox.Height));
          m_isGameActive = false;
+         m_shapePreviewSize = new Size(pbShapeView.Width, pbShapeView.Height);
          worker = new BackgroundWorker();
          cbShapes.DataSource = Enum.GetValues(typeof(Shape));
+         pictureBox.BackColor = Color.White;
+         pictureBox.BackgroundImage = m_gameCreator.PopulationGridToBitmap();
+
+         pbShapeView.BackColor = Color.White;
+         pbShapeView.BackgroundImage = m_gameCreator.GetCustomPopulationGrid(m_shapePreviewSize, m_shapePreviewCellSize, Shape.Point);
       }
 
       #region [Controls event section]
@@ -49,11 +60,10 @@ namespace TheGameOfLive
 
       private void ButtonNextStepClicked(object sender, EventArgs e)
       {
-         panelPopulation.Refresh();
          UpdateUIPanel(m_gameCreator.PopulationGridToBitmapForNextStep());
       }
 
-      private void PanelOnMouseClicked(object sender, MouseEventArgs e)
+      private void PictureBoxOnMouseClicked(object sender, MouseEventArgs e)
       {
          // póki co dodawać kształty można tylko przy zatrzymanej grze
          //if (m_isGameActive)
@@ -64,7 +74,10 @@ namespace TheGameOfLive
 
       private void ShapesSelectedIndexChanged(object sender, EventArgs e)
       {
-         m_gameCreator.CurrentShape = (Shape)Enum.Parse(typeof(Shape), cbShapes.Text);
+         var shape = (Shape)Enum.Parse(typeof(Shape), cbShapes.Text);
+         m_gameCreator.CurrentShape = shape;
+         pbShapeView.BackgroundImage = m_gameCreator.GetCustomPopulationGrid(m_shapePreviewSize, m_shapePreviewCellSize, shape);
+         pbShapeView.Refresh();
       }
 
       #endregion [Controls event section]
@@ -75,13 +88,14 @@ namespace TheGameOfLive
          {
             Invoke((Action)(() => UpdateUIPanel(m_gameCreator.PopulationGridToBitmapForNextStep())));
             m_operationCounter++;
-            Thread.Sleep(100);
+            //Thread.Sleep(100);
          }
       }
 
       private void UpdateUIPanel(Bitmap bmp)
       {
-         panelPopulation.BackgroundImage = bmp;
+         pictureBox.BackgroundImage = bmp;
+         pictureBox.Refresh();
       }
    }
 }

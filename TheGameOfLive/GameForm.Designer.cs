@@ -28,27 +28,21 @@
       /// </summary>
       private void InitializeComponent()
       {
-         this.panelPopulation = new System.Windows.Forms.Panel();
          this.btnNextStep = new System.Windows.Forms.Button();
          this.btnStartStop = new System.Windows.Forms.Button();
          this.cbShapes = new System.Windows.Forms.ComboBox();
          this.label1 = new System.Windows.Forms.Label();
+         this.pictureBox = new System.Windows.Forms.PictureBox();
+         this.pbShapeView = new System.Windows.Forms.PictureBox();
+         ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+         ((System.ComponentModel.ISupportInitialize)(this.pbShapeView)).BeginInit();
          this.SuspendLayout();
-         // 
-         // panelPopulation
-         // 
-         this.panelPopulation.BackColor = System.Drawing.SystemColors.ButtonFace;
-         this.panelPopulation.Location = new System.Drawing.Point(217, 12);
-         this.panelPopulation.Name = "panelPopulation";
-         this.panelPopulation.Size = new System.Drawing.Size(450, 450);
-         this.panelPopulation.TabIndex = 0;
-         this.panelPopulation.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PanelOnMouseClicked);
          // 
          // btnNextStep
          // 
          this.btnNextStep.Location = new System.Drawing.Point(24, 86);
          this.btnNextStep.Name = "btnNextStep";
-         this.btnNextStep.Size = new System.Drawing.Size(175, 44);
+         this.btnNextStep.Size = new System.Drawing.Size(170, 44);
          this.btnNextStep.TabIndex = 1;
          this.btnNextStep.Text = "Next Step";
          this.btnNextStep.UseVisualStyleBackColor = true;
@@ -60,7 +54,7 @@
          this.btnStartStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.btnStartStop.Location = new System.Drawing.Point(24, 12);
          this.btnStartStop.Name = "btnStartStop";
-         this.btnStartStop.Size = new System.Drawing.Size(175, 52);
+         this.btnStartStop.Size = new System.Drawing.Size(170, 52);
          this.btnStartStop.TabIndex = 3;
          this.btnStartStop.Text = "START";
          this.btnStartStop.UseVisualStyleBackColor = false;
@@ -72,7 +66,7 @@
          this.cbShapes.FormattingEnabled = true;
          this.cbShapes.Location = new System.Drawing.Point(24, 162);
          this.cbShapes.Name = "cbShapes";
-         this.cbShapes.Size = new System.Drawing.Size(175, 21);
+         this.cbShapes.Size = new System.Drawing.Size(170, 21);
          this.cbShapes.TabIndex = 4;
          this.cbShapes.SelectedIndexChanged += new System.EventHandler(this.ShapesSelectedIndexChanged);
          // 
@@ -85,32 +79,52 @@
          this.label1.TabIndex = 5;
          this.label1.Text = "Kształt:";
          // 
+         // pictureBox
+         // 
+         this.pictureBox.Location = new System.Drawing.Point(205, 14);
+         this.pictureBox.Name = "pictureBox";
+         this.pictureBox.Size = new System.Drawing.Size(462, 445);
+         this.pictureBox.TabIndex = 6;
+         this.pictureBox.TabStop = false;
+         this.pictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PictureBoxOnMouseClicked);
+         // 
+         // pbShapeView
+         // 
+         this.pbShapeView.Location = new System.Drawing.Point(24, 198);
+         this.pbShapeView.Name = "pbShapeView";
+         this.pbShapeView.Size = new System.Drawing.Size(170, 170);
+         this.pbShapeView.TabIndex = 7;
+         this.pbShapeView.TabStop = false;
+         // 
          // GameForm
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
          this.ClientSize = new System.Drawing.Size(679, 471);
+         this.Controls.Add(this.pbShapeView);
+         this.Controls.Add(this.pictureBox);
          this.Controls.Add(this.label1);
          this.Controls.Add(this.cbShapes);
          this.Controls.Add(this.btnStartStop);
          this.Controls.Add(this.btnNextStep);
-         this.Controls.Add(this.panelPopulation);
          this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
          this.Name = "GameForm";
          this.Text = "Game of Live";
+         ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+         ((System.ComponentModel.ISupportInitialize)(this.pbShapeView)).EndInit();
          this.ResumeLayout(false);
          this.PerformLayout();
 
       }
 
       #endregion
-
-      private System.Windows.Forms.Panel panelPopulation;
       private System.Windows.Forms.Button btnNextStep;
       private System.Windows.Forms.Button btnStartStop;
       private System.Windows.Forms.ComboBox cbShapes;
       private System.Windows.Forms.Label label1;
+      private System.Windows.Forms.PictureBox pictureBox;
+      private System.Windows.Forms.PictureBox pbShapeView;
    }
 }
 

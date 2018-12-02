@@ -26,6 +26,11 @@ namespace App.Impl.GameOfLive
          return Init2DimArrar<State>(m_height, m_width).Fill(State.Dead);
       }
 
+      public State[][] GetCustomPopulation(State a_state)
+      {
+         return Init2DimArrar<State>(m_height, m_width).Fill(a_state);
+      }
+
       public State[][] GetNextPopulationCycle(State[][] a_actualCycle)
       {
          var nextCycle = Init2DimArrar<State>(m_height, m_width);

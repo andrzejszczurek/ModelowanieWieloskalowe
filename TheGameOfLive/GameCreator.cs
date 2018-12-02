@@ -34,9 +34,15 @@ namespace TheGameOfLive
          return m_gameOfLive.GetDeadPopulation();
       }
 
-      public Rectangle CreateCell(int x, int y)
+      public Rectangle CreateCell(int a_x, int a_y)
       {
-         var cell = new Rectangle(new Point(x * m_gameOfLive.CellSize, y * m_gameOfLive.CellSize), m_size);
+         var cell = new Rectangle(new Point(a_x * m_gameOfLive.CellSize, a_y * m_gameOfLive.CellSize), m_size);
+         return cell;
+      }
+
+      public Rectangle CreateCell(int a_x, int a_y, int a_size)
+      {
+         var cell = new Rectangle(new Point(a_x * a_size, a_y * a_size), new Size(a_size, a_size));
          return cell;
       }
 
@@ -65,6 +71,32 @@ namespace TheGameOfLive
          }
          return bmp;
       }
+
+      public Bitmap GetCustomPopulationGrid(Size a_grid, int a_cellSize, Shape? a_shape)
+      {
+         var bmp = new Bitmap(a_grid.Width, a_grid.Height);
+         var population = new GameOfLive(a_grid.Height, a_grid.Width, a_cellSize).GetCustomPopulation(State.Dead);
+         Graphics g = Graphics.FromImage(bmp);
+         SolidBrush sb = new SolidBrush(Color.Black);
+
+         if (a_shape != null)
+            population 
+               = StructuresFactory
+               .PutStructure(population, new Seed((a_grid.Width / a_cellSize) / 2, (a_grid.Height / a_cellSize) / 2), a_shape.Value);
+
+         for (int i = 0; i < population.Length; i++)
+         {
+            for (int j = 0; j < population[i].Length; j++)
+            {
+               if (population[i][j] == State.Alive)
+                  g.FillRectangle(sb, CreateCell(j, i, a_cellSize));
+               else
+                  g.DrawRectangle(new Pen(sb, 1), CreateCell(j, i, a_cellSize));
+            }
+         }
+         return bmp;
+      }
+
 
       public Bitmap PutPoint(int a_X, int a_Y)
       {
