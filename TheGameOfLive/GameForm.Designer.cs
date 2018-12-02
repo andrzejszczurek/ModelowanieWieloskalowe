@@ -31,6 +31,8 @@
          this.panelPopulation = new System.Windows.Forms.Panel();
          this.btnNextStep = new System.Windows.Forms.Button();
          this.btnStartStop = new System.Windows.Forms.Button();
+         this.cbShapes = new System.Windows.Forms.ComboBox();
+         this.label1 = new System.Windows.Forms.Label();
          this.SuspendLayout();
          // 
          // panelPopulation
@@ -40,6 +42,7 @@
          this.panelPopulation.Name = "panelPopulation";
          this.panelPopulation.Size = new System.Drawing.Size(450, 450);
          this.panelPopulation.TabIndex = 0;
+         this.panelPopulation.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PanelOnMouseClicked);
          // 
          // btnNextStep
          // 
@@ -63,18 +66,41 @@
          this.btnStartStop.UseVisualStyleBackColor = false;
          this.btnStartStop.Click += new System.EventHandler(this.StartButtonClicked);
          // 
+         // cbShapes
+         // 
+         this.cbShapes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+         this.cbShapes.FormattingEnabled = true;
+         this.cbShapes.Location = new System.Drawing.Point(24, 162);
+         this.cbShapes.Name = "cbShapes";
+         this.cbShapes.Size = new System.Drawing.Size(175, 21);
+         this.cbShapes.TabIndex = 4;
+         this.cbShapes.SelectedIndexChanged += new System.EventHandler(this.ShapesSelectedIndexChanged);
+         // 
+         // label1
+         // 
+         this.label1.AutoSize = true;
+         this.label1.Location = new System.Drawing.Point(24, 143);
+         this.label1.Name = "label1";
+         this.label1.Size = new System.Drawing.Size(43, 13);
+         this.label1.TabIndex = 5;
+         this.label1.Text = "Kształt:";
+         // 
          // GameForm
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
          this.ClientSize = new System.Drawing.Size(679, 471);
+         this.Controls.Add(this.label1);
+         this.Controls.Add(this.cbShapes);
          this.Controls.Add(this.btnStartStop);
          this.Controls.Add(this.btnNextStep);
          this.Controls.Add(this.panelPopulation);
+         this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
          this.Name = "GameForm";
          this.Text = "Game of Live";
          this.ResumeLayout(false);
+         this.PerformLayout();
 
       }
 
@@ -83,6 +109,8 @@
       private System.Windows.Forms.Panel panelPopulation;
       private System.Windows.Forms.Button btnNextStep;
       private System.Windows.Forms.Button btnStartStop;
+      private System.Windows.Forms.ComboBox cbShapes;
+      private System.Windows.Forms.Label label1;
    }
 }
 

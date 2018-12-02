@@ -8,21 +8,22 @@ namespace App.Impl.GameOfLive
 {
    public enum Shape
    {
+      Point,
       Oscilator,
       Glider,
    }
 
    public class Seed
    {
-      public Seed(int x, int y )
+      public int X { get; set; }
+
+      public int Y { get; set; }
+
+      public Seed(int x, int y)
       {
          X = x;
          Y = y;
       }
-
-      public int X { get; set; }
-
-      public int Y { get; set; }
    }
 
    public class StructuresFactory
@@ -31,6 +32,12 @@ namespace App.Impl.GameOfLive
       {
          switch (shape)
          {
+            case Shape.Point:
+               {
+                  CreatePoint(a_grid, a_seed);
+                  break;
+               }
+
             case Shape.Glider:
                {
                   CreateGlider(a_grid, a_seed);
@@ -44,6 +51,11 @@ namespace App.Impl.GameOfLive
                }
          }
          return a_grid;
+      }
+
+      private void CreatePoint(State[][] a_grid, Seed a_seed)
+      {
+         a_grid[a_seed.Y][a_seed.X] = State.Alive;
       }
 
       private void CreateOscilator(State[][] a_grid, Seed a_seed)

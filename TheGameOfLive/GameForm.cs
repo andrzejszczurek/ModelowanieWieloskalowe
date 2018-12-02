@@ -24,7 +24,10 @@ namespace TheGameOfLive
          m_gameCreator = new GameCreator(10, new Size(panelPopulation.Width, panelPopulation.Height));
          m_isGameActive = false;
          worker = new BackgroundWorker();
+         cbShapes.DataSource = Enum.GetValues(typeof(Shape));
       }
+
+      #region [Controls event section]
 
       private void StartButtonClicked(object sender, EventArgs e)
       {
@@ -47,20 +50,32 @@ namespace TheGameOfLive
       private void ButtonNextStepClicked(object sender, EventArgs e)
       {
          panelPopulation.Refresh();
-         UpdateUIPanel(m_gameCreator.PopulationGridToBitmap());
+         UpdateUIPanel(m_gameCreator.PopulationGridToBitmapForNextStep());
       }
+
+      private void PanelOnMouseClicked(object sender, MouseEventArgs e)
+      {
+         // póki co dodawać kształty można tylko przy zatrzymanej grze
+         //if (m_isGameActive)
+         //   return;
+
+         UpdateUIPanel(m_gameCreator.PutSelectedShape(e.X, e.Y));
+      }
+
+      private void ShapesSelectedIndexChanged(object sender, EventArgs e)
+      {
+         m_gameCreator.CurrentShape = (Shape)Enum.Parse(typeof(Shape), cbShapes.Text);
+      }
+
+      #endregion [Controls event section]
 
       private void Work(object sender, DoWorkEventArgs e)
       {
-         if (m_operationCounter == 0)
-            m_gameCreator.Population =
-               m_gameCreator.StructuresFactory.PutStructure(m_gameCreator.Population, new Seed(3, 3), Shape.Glider);
-
          while (m_isGameActive)
          {
-            Invoke((Action)(() => UpdateUIPanel(m_gameCreator.PopulationGridToBitmap())));
+            Invoke((Action)(() => UpdateUIPanel(m_gameCreator.PopulationGridToBitmapForNextStep())));
             m_operationCounter++;
-            Thread.Sleep(80);
+            Thread.Sleep(100);
          }
       }
 
