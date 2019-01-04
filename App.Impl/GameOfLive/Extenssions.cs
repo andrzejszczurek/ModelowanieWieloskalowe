@@ -16,5 +16,14 @@ namespace App.Impl.GameOfLive
 
          return a_2DimArray;
       }
+
+      public static T[][] Init2DimArray<T>(int height, int width)
+      {
+         var arr = new T[height][];
+         for (int i = 0; i < arr.Length; i++)
+            arr[i] = new T[width];
+
+         return arr;
+      }
    }
 }

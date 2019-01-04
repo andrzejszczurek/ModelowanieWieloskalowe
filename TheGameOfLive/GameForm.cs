@@ -19,7 +19,7 @@ namespace TheGameOfLive
 
       private Size m_shapePreviewSize;
 
-      private int m_cellSize = 5;
+      private int m_cellSize = 10;
 
       private int m_shapePreviewCellSize = 10;
 
@@ -68,7 +68,6 @@ namespace TheGameOfLive
          // póki co dodawać kształty można tylko przy zatrzymanej grze
          //if (m_isGameActive)
          //   return;
-
          UpdateUIPanel(m_gameCreator.PutSelectedShape(e.X, e.Y));
       }
 
@@ -88,7 +87,7 @@ namespace TheGameOfLive
          {
             Invoke((Action)(() => UpdateUIPanel(m_gameCreator.PopulationGridToBitmapForNextStep())));
             m_operationCounter++;
-            //Thread.Sleep(100);
+            Thread.Sleep(100);
          }
       }
 
@@ -96,6 +95,17 @@ namespace TheGameOfLive
       {
          pictureBox.BackgroundImage = bmp;
          pictureBox.Refresh();
+      }
+
+      private void btnReset_Click(object sender, EventArgs e)
+      {
+         m_gameCreator.ResetGrid();
+      }
+
+      private void btnChaos_Click(object sender, EventArgs e)
+      {
+         m_gameCreator.GenerateRandomPopulation();
+         UpdateUIPanel(m_gameCreator.PopulationGridToBitmapForNextStep());
       }
    }
 }

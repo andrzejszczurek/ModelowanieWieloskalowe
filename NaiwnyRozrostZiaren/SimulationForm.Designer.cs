@@ -1,6 +1,6 @@
-﻿namespace TheGameOfLive
+﻿namespace NaiwnyRozrostZiaren
 {
-   partial class GameForm
+   partial class SimulationForm
    {
       /// <summary>
       /// Required designer variable.
@@ -30,14 +30,15 @@
       {
          this.btnNextStep = new System.Windows.Forms.Button();
          this.btnStartStop = new System.Windows.Forms.Button();
-         this.cbShapes = new System.Windows.Forms.ComboBox();
-         this.label1 = new System.Windows.Forms.Label();
          this.pictureBox = new System.Windows.Forms.PictureBox();
-         this.pbShapeView = new System.Windows.Forms.PictureBox();
          this.btnReset = new System.Windows.Forms.Button();
-         this.btnChaos = new System.Windows.Forms.Button();
+         this.btnRandom = new System.Windows.Forms.Button();
+         this.cbBoundary = new System.Windows.Forms.ComboBox();
+         this.cbNeihborhood = new System.Windows.Forms.ComboBox();
+         this.lblBoundaryType = new System.Windows.Forms.Label();
+         this.lblneighborhood = new System.Windows.Forms.Label();
+         this.btnPostprocessing = new System.Windows.Forms.Button();
          ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
-         ((System.ComponentModel.ISupportInitialize)(this.pbShapeView)).BeginInit();
          this.SuspendLayout();
          // 
          // btnNextStep
@@ -62,25 +63,6 @@
          this.btnStartStop.UseVisualStyleBackColor = false;
          this.btnStartStop.Click += new System.EventHandler(this.StartButtonClicked);
          // 
-         // cbShapes
-         // 
-         this.cbShapes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-         this.cbShapes.FormattingEnabled = true;
-         this.cbShapes.Location = new System.Drawing.Point(21, 248);
-         this.cbShapes.Name = "cbShapes";
-         this.cbShapes.Size = new System.Drawing.Size(170, 21);
-         this.cbShapes.TabIndex = 4;
-         this.cbShapes.SelectedIndexChanged += new System.EventHandler(this.ShapesSelectedIndexChanged);
-         // 
-         // label1
-         // 
-         this.label1.AutoSize = true;
-         this.label1.Location = new System.Drawing.Point(21, 229);
-         this.label1.Name = "label1";
-         this.label1.Size = new System.Drawing.Size(43, 13);
-         this.label1.TabIndex = 5;
-         this.label1.Text = "Kształt:";
-         // 
          // pictureBox
          // 
          this.pictureBox.Location = new System.Drawing.Point(205, 14);
@@ -89,14 +71,6 @@
          this.pictureBox.TabIndex = 6;
          this.pictureBox.TabStop = false;
          this.pictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PictureBoxOnMouseClicked);
-         // 
-         // pbShapeView
-         // 
-         this.pbShapeView.Location = new System.Drawing.Point(21, 284);
-         this.pbShapeView.Name = "pbShapeView";
-         this.pbShapeView.Size = new System.Drawing.Size(170, 170);
-         this.pbShapeView.TabIndex = 7;
-         this.pbShapeView.TabStop = false;
          // 
          // btnReset
          // 
@@ -108,35 +82,82 @@
          this.btnReset.UseVisualStyleBackColor = true;
          this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
          // 
-         // btnChaos
+         // btnRandom
          // 
-         this.btnChaos.Location = new System.Drawing.Point(24, 120);
-         this.btnChaos.Name = "btnChaos";
-         this.btnChaos.Size = new System.Drawing.Size(170, 44);
-         this.btnChaos.TabIndex = 9;
-         this.btnChaos.Text = "Generuj chaos";
-         this.btnChaos.UseVisualStyleBackColor = true;
-         this.btnChaos.Click += new System.EventHandler(this.btnChaos_Click);
+         this.btnRandom.Location = new System.Drawing.Point(24, 120);
+         this.btnRandom.Name = "btnRandom";
+         this.btnRandom.Size = new System.Drawing.Size(170, 44);
+         this.btnRandom.TabIndex = 9;
+         this.btnRandom.Text = "Losowe zarodki";
+         this.btnRandom.UseVisualStyleBackColor = true;
+         this.btnRandom.Click += new System.EventHandler(this.btnChaos_Click);
          // 
-         // GameForm
+         // cbBoundary
+         // 
+         this.cbBoundary.FormattingEnabled = true;
+         this.cbBoundary.Location = new System.Drawing.Point(24, 250);
+         this.cbBoundary.Name = "cbBoundary";
+         this.cbBoundary.Size = new System.Drawing.Size(121, 21);
+         this.cbBoundary.TabIndex = 10;
+         this.cbBoundary.SelectedIndexChanged += new System.EventHandler(this.cbBoundary_SelectedIndexChanged);
+         // 
+         // cbNeihborhood
+         // 
+         this.cbNeihborhood.FormattingEnabled = true;
+         this.cbNeihborhood.Location = new System.Drawing.Point(24, 306);
+         this.cbNeihborhood.Name = "cbNeihborhood";
+         this.cbNeihborhood.Size = new System.Drawing.Size(121, 21);
+         this.cbNeihborhood.TabIndex = 11;
+         this.cbNeihborhood.SelectedIndexChanged += new System.EventHandler(this.cbNeihborhood_SelectedIndexChanged);
+         // 
+         // lblBoundaryType
+         // 
+         this.lblBoundaryType.AutoSize = true;
+         this.lblBoundaryType.Location = new System.Drawing.Point(21, 234);
+         this.lblBoundaryType.Name = "lblBoundaryType";
+         this.lblBoundaryType.Size = new System.Drawing.Size(55, 13);
+         this.lblBoundaryType.TabIndex = 12;
+         this.lblBoundaryType.Text = "Boundary:";
+         // 
+         // lblneighborhood
+         // 
+         this.lblneighborhood.AutoSize = true;
+         this.lblneighborhood.Location = new System.Drawing.Point(21, 290);
+         this.lblneighborhood.Name = "lblneighborhood";
+         this.lblneighborhood.Size = new System.Drawing.Size(74, 13);
+         this.lblneighborhood.TabIndex = 13;
+         this.lblneighborhood.Text = "Neithborhood:";
+         // 
+         // btnPostprocessing
+         // 
+         this.btnPostprocessing.Location = new System.Drawing.Point(24, 436);
+         this.btnPostprocessing.Name = "btnPostprocessing";
+         this.btnPostprocessing.Size = new System.Drawing.Size(170, 23);
+         this.btnPostprocessing.TabIndex = 14;
+         this.btnPostprocessing.Text = "Postprocessing";
+         this.btnPostprocessing.UseVisualStyleBackColor = true;
+         this.btnPostprocessing.Click += new System.EventHandler(this.btnPostprocessing_Click);
+         // 
+         // SimulationForm
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
          this.ClientSize = new System.Drawing.Size(679, 471);
-         this.Controls.Add(this.btnChaos);
+         this.Controls.Add(this.btnPostprocessing);
+         this.Controls.Add(this.lblneighborhood);
+         this.Controls.Add(this.lblBoundaryType);
+         this.Controls.Add(this.cbNeihborhood);
+         this.Controls.Add(this.cbBoundary);
+         this.Controls.Add(this.btnRandom);
          this.Controls.Add(this.btnReset);
-         this.Controls.Add(this.pbShapeView);
          this.Controls.Add(this.pictureBox);
-         this.Controls.Add(this.label1);
-         this.Controls.Add(this.cbShapes);
          this.Controls.Add(this.btnStartStop);
          this.Controls.Add(this.btnNextStep);
          this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-         this.Name = "GameForm";
-         this.Text = "Game of Live";
+         this.Name = "SimulationForm";
+         this.Text = "Naiwny rozrost ziarem";
          ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
-         ((System.ComponentModel.ISupportInitialize)(this.pbShapeView)).EndInit();
          this.ResumeLayout(false);
          this.PerformLayout();
 
@@ -145,12 +166,13 @@
       #endregion
       private System.Windows.Forms.Button btnNextStep;
       private System.Windows.Forms.Button btnStartStop;
-      private System.Windows.Forms.ComboBox cbShapes;
-      private System.Windows.Forms.Label label1;
       private System.Windows.Forms.PictureBox pictureBox;
-      private System.Windows.Forms.PictureBox pbShapeView;
       private System.Windows.Forms.Button btnReset;
-      private System.Windows.Forms.Button btnChaos;
+      private System.Windows.Forms.Button btnRandom;
+      private System.Windows.Forms.ComboBox cbBoundary;
+      private System.Windows.Forms.ComboBox cbNeihborhood;
+      private System.Windows.Forms.Label lblBoundaryType;
+      private System.Windows.Forms.Label lblneighborhood;
+      private System.Windows.Forms.Button btnPostprocessing;
    }
 }
-

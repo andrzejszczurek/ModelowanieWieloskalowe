@@ -1,4 +1,5 @@
 ﻿using App.Impl.GameOfLive;
+using System;
 using System.Drawing;
 
 namespace TheGameOfLive
@@ -15,7 +16,7 @@ namespace TheGameOfLive
 
       private readonly Size m_size;
 
-      private readonly Size m_area; 
+      private readonly Size m_area;
 
       public readonly GameOfLive m_gameOfLive;
 
@@ -79,8 +80,8 @@ namespace TheGameOfLive
          Graphics g = Graphics.FromImage(bmp);
          SolidBrush sb = new SolidBrush(Color.Black);
 
-         if (a_shape != null)
-            population 
+         if (a_shape != null && a_shape != Shape.Gun)
+            population
                = StructuresFactory
                .PutStructure(population, new Seed((a_grid.Width / a_cellSize) / 2, (a_grid.Height / a_cellSize) / 2), a_shape.Value);
 
@@ -125,6 +126,26 @@ namespace TheGameOfLive
       public Bitmap PutSelectedShape(Seed a_seed)
       {
          return PutShape(CurrentShape, a_seed);
+      }
+
+      public void ResetGrid()
+      {
+         Population = m_gameOfLive.GetDeadPopulation();
+      }
+
+      public void GenerateRandomPopulation()
+      {
+         var population = m_gameOfLive.GetDeadPopulation();
+         Random random = new Random();
+
+         for (int i = 0; i < population.Length; i++)
+         {
+            for (int j = 0; j < population[i].Length; j++)
+            {
+               population[i][j] = random.Next(0, 2) == 0 ? State.Dead : State.Alive;
+            }
+         }
+         Population = population;
       }
 
    }

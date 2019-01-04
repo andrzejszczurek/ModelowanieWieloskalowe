@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,11 +41,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Conditions\Boudary\BoundaryFactory.cs" />
+    <Compile Include="Conditions\Boudary\IBoudaryConditionRule.cs" />
+    <Compile Include="Conditions\Boudary\NonPeriodicalBoudary.cs" />
+    <Compile Include="Conditions\Boudary\PeriodicalBoudary.cs" />
+    <Compile Include="Conditions\Neighborhood\HexagonalLeftHeighborhood.cs" />
+    <Compile Include="Conditions\Neighborhood\HexagonalRandomHeighborhood.cs" />
+    <Compile Include="Conditions\Neighborhood\HexagonalRightNeighborhood.cs" />
+    <Compile Include="Conditions\Neighborhood\INeighborhoodRule.cs" />
+    <Compile Include="Conditions\Neighborhood\MooreNeighborhood.cs" />
+    <Compile Include="Conditions\Neighborhood\NeighboorhoodFactory.cs" />
+    <Compile Include="Conditions\Neighborhood\PentagonalLeftNeighborhood.cs" />
+    <Compile Include="Conditions\Neighborhood\PentagonalRandomNeighborhood.cs" />
+    <Compile Include="Conditions\Neighborhood\PentagonalRightNeighborhood.cs" />
+    <Compile Include="Conditions\Neighborhood\VonNeumanNeighborhood.cs" />
     <Compile Include="GameOfLive\Extenssions.cs" />
     <Compile Include="GameOfLive\GameOfLive.cs" />
     <Compile Include="GameOfLive\State.cs" />
     <Compile Include="GameOfLive\StructuresFactory.cs" />
+    <Compile Include="NaiwyRozrostZiaren\Enum\BoundaryCondition.cs" />
+    <Compile Include="NaiwyRozrostZiaren\Enum\Neighborhood.cs" />
+    <Compile Include="NaiwyRozrostZiaren\GrainElement.cs" />
+    <Compile Include="NaiwyRozrostZiaren\GrainElementCreator.cs" />
+    <Compile Include="NaiwyRozrostZiaren\Postprocessing.cs" />
+    <Compile Include="NaiwyRozrostZiaren\Simulation.cs" />
+    <Compile Include="NaiwyRozrostZiaren\SimulationCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
