@@ -29,6 +29,7 @@ namespace NaiwnyRozrostZiaren
          pictureBox.BackgroundImage = m_creator.PopulationGridToBitmap();
          cbBoundary.DataSource = SimulationCreator.GetSupportedBoundaries();
          cbNeihborhood.DataSource = SimulationCreator.GetSupportedNeighborhoods();
+         numGrainCount.Value = 10;
       }
 
       #region [Controls event section]
@@ -60,6 +61,27 @@ namespace NaiwnyRozrostZiaren
          }
       }
 
+      private void cbBoundary_SelectedIndexChanged(object sender, EventArgs e)
+      {
+         var type = (BoundaryCondition)Enum.Parse(typeof(BoundaryCondition), cbBoundary.Text);
+         m_creator.SetBoundary(type);
+      }
+
+      private void cbNeihborhood_SelectedIndexChanged(object sender, EventArgs e)
+      {
+         var type = (Neighborhood)Enum.Parse(typeof(Neighborhood), cbNeihborhood.Text);
+         m_creator.SetNeighborhood(type);
+      }
+
+      private void btnPostprocessing_Click(object sender, EventArgs e)
+      {
+         var postprocessing = new Postprocessing(m_creator.CurrentState, m_cellSize);
+         var grains = m_creator.GetGrains();
+         postprocessing.CalculateAverageGrainSurface(grains);
+         postprocessing.CalculateBoudaryLength(grains, m_creator.GetBoundary());
+         new PostprocessingForm(grains).ShowDialog();
+      }
+
       private void ButtonNextStepClicked(object sender, EventArgs e)
       {
          UpdateUIPanel(m_creator.PopulationGridToBitmapForNextStep());
@@ -88,7 +110,7 @@ namespace NaiwnyRozrostZiaren
 
       private void btnChaos_Click(object sender, EventArgs e)
       {
-         UpdateUIPanel(m_creator.GenerateRandomStartGrains(10));
+         UpdateUIPanel(m_creator.GenerateRandomStartGrains((int)numGrainCount.Value), (int)numOffset.Value);
       }
 
       #endregion [Controls event section]
@@ -115,29 +137,6 @@ namespace NaiwnyRozrostZiaren
             btnRandom.Enabled = false;
             btnPostprocessing.Enabled = true;
          }
-      }
-
-      private void cbBoundary_SelectedIndexChanged(object sender, EventArgs e)
-      {
-         var type = (BoundaryCondition)Enum.Parse(typeof(BoundaryCondition), cbBoundary.Text);
-         m_creator.SetBoundary(type);
-      }
-
-      private void cbNeihborhood_SelectedIndexChanged(object sender, EventArgs e)
-      {
-         var type = (Neighborhood)Enum.Parse(typeof(Neighborhood), cbNeihborhood.Text);
-         m_creator.SetNeighborhood(type);
-      }
-
-      private void btnPostprocessing_Click(object sender, EventArgs e)
-      {
-         var postprocessing = new Postprocessing(m_creator.CurrentState, m_cellSize);
-         var grains = m_creator.GetGrains();
-
-         postprocessing.CalculateAverageGrainSurface(grains);
-         postprocessing.CalculateBoudaryLength(grains, m_creator.GetBoundary());
-
-         new PostprocessingForm(grains).ShowDialog();
       }
    }
 }

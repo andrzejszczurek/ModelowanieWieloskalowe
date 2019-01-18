@@ -38,7 +38,13 @@
          this.lblBoundaryType = new System.Windows.Forms.Label();
          this.lblneighborhood = new System.Windows.Forms.Label();
          this.btnPostprocessing = new System.Windows.Forms.Button();
+         this.lblOffset = new System.Windows.Forms.Label();
+         this.numOffset = new System.Windows.Forms.NumericUpDown();
+         this.lblGrainCount = new System.Windows.Forms.Label();
+         this.numGrainCount = new System.Windows.Forms.NumericUpDown();
          ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+         ((System.ComponentModel.ISupportInitialize)(this.numOffset)).BeginInit();
+         ((System.ComponentModel.ISupportInitialize)(this.numGrainCount)).BeginInit();
          this.SuspendLayout();
          // 
          // btnNextStep
@@ -104,7 +110,7 @@
          // cbNeihborhood
          // 
          this.cbNeihborhood.FormattingEnabled = true;
-         this.cbNeihborhood.Location = new System.Drawing.Point(24, 306);
+         this.cbNeihborhood.Location = new System.Drawing.Point(24, 290);
          this.cbNeihborhood.Name = "cbNeihborhood";
          this.cbNeihborhood.Size = new System.Drawing.Size(121, 21);
          this.cbNeihborhood.TabIndex = 11;
@@ -122,7 +128,7 @@
          // lblneighborhood
          // 
          this.lblneighborhood.AutoSize = true;
-         this.lblneighborhood.Location = new System.Drawing.Point(21, 290);
+         this.lblneighborhood.Location = new System.Drawing.Point(21, 274);
          this.lblneighborhood.Name = "lblneighborhood";
          this.lblneighborhood.Size = new System.Drawing.Size(74, 13);
          this.lblneighborhood.TabIndex = 13;
@@ -138,12 +144,48 @@
          this.btnPostprocessing.UseVisualStyleBackColor = true;
          this.btnPostprocessing.Click += new System.EventHandler(this.btnPostprocessing_Click);
          // 
+         // lblOffset
+         // 
+         this.lblOffset.AutoSize = true;
+         this.lblOffset.Location = new System.Drawing.Point(21, 314);
+         this.lblOffset.Name = "lblOffset";
+         this.lblOffset.Size = new System.Drawing.Size(64, 13);
+         this.lblOffset.TabIndex = 15;
+         this.lblOffset.Text = "Grain offset:";
+         // 
+         // numOffset
+         // 
+         this.numOffset.Location = new System.Drawing.Point(24, 330);
+         this.numOffset.Name = "numOffset";
+         this.numOffset.Size = new System.Drawing.Size(120, 20);
+         this.numOffset.TabIndex = 17;
+         // 
+         // lblGrainCount
+         // 
+         this.lblGrainCount.AutoSize = true;
+         this.lblGrainCount.Location = new System.Drawing.Point(20, 353);
+         this.lblGrainCount.Name = "lblGrainCount";
+         this.lblGrainCount.Size = new System.Drawing.Size(65, 13);
+         this.lblGrainCount.TabIndex = 18;
+         this.lblGrainCount.Text = "Grain count:";
+         // 
+         // numGrainCount
+         // 
+         this.numGrainCount.Location = new System.Drawing.Point(24, 369);
+         this.numGrainCount.Name = "numGrainCount";
+         this.numGrainCount.Size = new System.Drawing.Size(120, 20);
+         this.numGrainCount.TabIndex = 19;
+         // 
          // SimulationForm
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
          this.ClientSize = new System.Drawing.Size(679, 471);
+         this.Controls.Add(this.numGrainCount);
+         this.Controls.Add(this.lblGrainCount);
+         this.Controls.Add(this.numOffset);
+         this.Controls.Add(this.lblOffset);
          this.Controls.Add(this.btnPostprocessing);
          this.Controls.Add(this.lblneighborhood);
          this.Controls.Add(this.lblBoundaryType);
@@ -158,6 +200,8 @@
          this.Name = "SimulationForm";
          this.Text = "Naiwny rozrost ziarem";
          ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+         ((System.ComponentModel.ISupportInitialize)(this.numOffset)).EndInit();
+         ((System.ComponentModel.ISupportInitialize)(this.numGrainCount)).EndInit();
          this.ResumeLayout(false);
          this.PerformLayout();
 
@@ -174,5 +218,9 @@
       private System.Windows.Forms.Label lblBoundaryType;
       private System.Windows.Forms.Label lblneighborhood;
       private System.Windows.Forms.Button btnPostprocessing;
+      private System.Windows.Forms.Label lblOffset;
+      private System.Windows.Forms.NumericUpDown numOffset;
+      private System.Windows.Forms.Label lblGrainCount;
+      private System.Windows.Forms.NumericUpDown numGrainCount;
    }
 }

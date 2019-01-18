@@ -81,16 +81,13 @@ namespace App.Impl.NaiwyRozrostZiaren
       public bool IsAnyFreeSpace()
       {
          int freeCellCounter = 0;
-
          for (int i = 0; i < CurrentState.Length; i++)
-         {
             freeCellCounter += CurrentState[i].Count(c => c is null);
-         }
 
          return freeCellCounter != 0;
       }
 
-      public Bitmap GenerateRandomStartGrains(int a_count)
+      public Bitmap GenerateRandomStartGrains(int a_count, int? offset = null)
       {
          Random random = new Random();
 
@@ -98,6 +95,10 @@ namespace App.Impl.NaiwyRozrostZiaren
          {
             var y = random.Next(0, GridSize.Height / m_cellSize);
             var x = random.Next(0, GridSize.Width / m_cellSize);
+
+            if (CheckIsNewGrainInOffset(x, y, offset))
+               continue;
+
             PutPointInternal(x, y);
          }
          return PopulationGridToBitmap();
@@ -129,5 +130,13 @@ namespace App.Impl.NaiwyRozrostZiaren
       public IEnumerable<GrainElement> GetGrains() 
          => m_seedCreator.Elements;
 
+
+      private bool CheckIsNewGrainInOffset(int x, int y, int? offset)
+      {
+         if (offset is null)
+            return false;
+         // TODO:
+         return false;
+      }
    }
 }
